@@ -1,0 +1,25 @@
+﻿{
+    "output_file": "settings.json",
+
+    "defaultAmount": {
+        "type": "numberbox",
+        "value": 10,
+        "label": "Default Amount",
+        "tooltip": "Default Amount",
+        "group": "General"
+    },
+    "maxAmount": {
+        "type": "numberbox",
+        "value": 15,
+        "label": "Max Amount",
+        "tooltip": "Max Amount",
+        "group": "General"
+    },
+    "command": {
+        "type": "textbox",
+        "value": "!songlist",
+        "label": "Songlist command",
+        "tooltip": "Songlist command. Default: !songlist",
+        "group": "General"
+    },
+}
