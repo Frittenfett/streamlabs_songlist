@@ -12,3 +12,4 @@ Have fun :)
 ### Changelog
 
 * v1.0.0 Major release
+* v1.0.1 Nothing in songlist feature

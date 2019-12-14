@@ -5,6 +5,8 @@ import json
 import codecs
 import os
 import clr
+import random
+import time
 
 clr.AddReference("IronPython.Modules.dll")
 import urllib
@@ -16,7 +18,7 @@ ScriptName = "Songlist"
 Website = "https://www.twitch.tv/frittenfettsenpai"
 Description = "A songlist for your stream."
 Creator = "frittenfettsenpai"
-Version = "1.0.0"
+Version = "1.0.1"
 
 
 # ---------------------------------------
@@ -45,25 +47,29 @@ def Execute(data):
     global settings
     if data.IsChatMessage():
         user = data.User
+        username = Parent.GetDisplayName(user)
 
         if (data.GetParam(0).lower() == settings["command"]):
+
             if data.GetParamCount() > 1:
                 limit = int(data.GetParam(1))
             else:
                 limit = int(settings["defaultAmount"])
 
             if limit < 0 or limit > int(settings["maxAmount"]):
-                username = Parent.GetDisplayName(user)
                 Parent.SendTwitchMessage("{0} Limit has to be between 1 and {1}!".format(username, settings["defaultAmount"]))
                 return
 
             songs = Parent.GetSongQueue(limit)
+            if len(songs) == 0:
+                Parent.SendTwitchMessage("Nothing is in the songlist yet.")
+                return
             songList = ""
             count = 1
             for obj in songs:
                 if count > 1:
                     songList = songList + " | "
-                songList = songList +str(count)+": "+songList + obj.Title
+                songList = songList + str(count)+": " + obj.Title
                 count = count + 1
 
             Parent.SendTwitchMessage(songList)
